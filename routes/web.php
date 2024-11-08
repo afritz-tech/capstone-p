@@ -21,7 +21,7 @@ Auth::routes();
 // Protected routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Profile routes
     Route::prefix('profile')->group(function () {
         Route::post('/update', [ProfileController::class, 'updateProfile']);

@@ -3,10 +3,10 @@
 @section('content')
 
 <!-- MAIN CONTENT -->
-<div class="mt-5 pt-3">
+<div class="pt-3 mt-5">
     <!-- Alert Section -->
     <div class="container my-3">
-        <div class="alert alert-info text-center" role="alert">
+        <div class="text-center alert alert-info" role="alert">
             In an effort to provide the most efficient and effective patient care, please update your information prior to your visit.
         </div>
     </div>
@@ -25,12 +25,12 @@
                 <div class="accordion-body">
                     <!-- Profile Picture and Personal Details -->
                     <div class="row">
-                        <div class="col-md-3 text-center">
+                        <div class="text-center col-md-3">
                             <!-- Profile Picture Upload -->
                             <form action="{{ route('profile.upload') }}" method="POST" enctype="multipart/form-data" id="profilePictureForm">
                                 @csrf
-                                <img id="profilePicture" src="{{ auth()->user()->profile_picture ?? 'https://via.placeholder.com/150' }}" 
-                                     class="rounded-circle img-fluid mb-3 mb-md-0" alt="Profile Picture">
+                                <img id="profilePicture" src="{{ auth()->user()->profile_picture ?? 'https://via.placeholder.com/150' }}"
+                                     class="mb-3 rounded-circle img-fluid mb-md-0" alt="Profile Picture">
                                 <div class="mt-2">
                                     <input type="file" name="profile_picture" id="profilePictureInput" accept="image/*" style="display: none;">
                                     <button type="button" class="btn btn-outline-secondary" id="uploadButton">
@@ -41,19 +41,19 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-sm-6 mb-3">
+                                <div class="mb-3 col-sm-6">
                                     <label for="firstName" class="form-label">First Name *</label>
                                     <input type="text" class="form-control" id="firstName" value="{{ auth()->user()->firstName }}" placeholder="First Name">
                                 </div>
-                                <div class="col-sm-6 mb-3">
+                                <div class="mb-3 col-sm-6">
                                     <label for="lastName" class="form-label">Last Name *</label>
                                     <input type="text" class="form-control" id="lastName" value="{{ auth()->user()->lastName }}" placeholder="Last Name">
                                 </div>
-                                <div class="col-sm-6 mb-3">
+                                <div class="mb-3 col-sm-6">
                                     <label for="birthDate" class="form-label">Date of Birth *</label>
                                     <input type="date" class="form-control" id="birthDate" value="{{ auth()->user()->birthDate?->format('Y-m-d') }}" placeholder="DD-MM-YYYY">
                                 </div>
-                                <div class="col-sm-6 mb-3">
+                                <div class="mb-3 col-sm-6">
                                     <label for="email" class="form-label">Email *</label>
                                     <input type="email" class="form-control" id="email" value="{{ auth()->user()->email }}" placeholder="Email Address">
                                 </div>
@@ -65,7 +65,7 @@
                     <div class="row">
                         <!-- Address Section -->
                         <div class="col-md-6">
-                            <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#addressModal">+ Add Address</button>
+                            <button class="mb-2 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addressModal">+ Add Address</button>
 
                             <!-- Address Modal -->
                             <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
@@ -87,7 +87,7 @@
                             </div>
 
                             <!-- Address Table -->
-                            <div class="table-responsive mt-3">
+                            <div class="mt-3 table-responsive">
                                 <div id="addressList" class="mt-3">
                                 <table id="addressesTable" class="table">
                                     <thead>
@@ -120,7 +120,7 @@
                         </div>
                         <!-- Phone Section -->
                         <div class="col-md-6">
-                            <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#phoneModal">+ Add Phone Number</button>
+                            <button class="mb-2 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#phoneModal">+ Add Phone Number</button>
 
                             <!-- Phone Number Modal -->
                             <div class="modal fade" id="phoneModal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true">
@@ -142,7 +142,7 @@
                             </div>
 
                             <!-- Phone Table -->
-                            <div class="table-responsive mt-3">
+                            <div class="mt-3 table-responsive">
                                 <table id="phonesTable" class="table">
                                     <thead>
                                         <tr>
@@ -152,11 +152,11 @@
                                     </thead>
                                     <tbody>
                                         @if(auth()->user()->phone_numbers)
-                                            @foreach(auth()->user()->phone_numbers as $phone)
+                                            @foreach(auth()->user()->phone_numbers as $phones)
                                             <tr>
-                                                <td>{{ $phone->phone_number }}</td>
+                                                <td>{{ $phones->phone_number }}</td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-danger delete-phone" data-id="{{ $phone->id }}">
+                                                    <button class="btn btn-sm btn-danger delete-phone" data-id="{{ $phones->id }}">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 </td>
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <!-- Save Changes Button -->
-                        <div class="col-12 d-flex justify-content-end mt-3">
+                        <div class="mt-3 col-12 d-flex justify-content-end">
                             <button class="btn btn-primary" id="saveChangesButton">Save Changes</button>
                         </div>
                     </div>
@@ -190,11 +190,11 @@
             </h2>
             <div id="collapseInsurance" class="accordion-collapse collapse" aria-labelledby="headingInsurance" data-bs-parent="#medicalAccordion">
                 <div class="accordion-body">
-                    <p>If you don’t have any insurance policy on file, please add primary insurance or set to “Self-pay” by confirming “I am Self-pay”.</p>
-                    <div class="d-flex flex-wrap mb-3">
-                        <button class="btn btn-primary me-2 mb-2" data-bs-toggle="modal" data-bs-target="#insuranceModal" id="addInsuranceButton">Add Primary Insurance</button>
-                        <button class="btn btn-success me-2 mb-2" id="selfPayButton">I am Self-pay</button>
-                        <button class="btn btn-secondary mb-2 d-none" id="resetSelfPayButton">Reset Self-Pay Status</button>
+                    <p>If you dont have any insurance policy on file, please add primary insurance or set to “Self-pay” by confirming “I am Self-pay”.</p>
+                    <div class="flex-wrap mb-3 d-flex">
+                        <button class="mb-2 btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#insuranceModal" id="addInsuranceButton">Add Primary Insurance</button>
+                        <button class="mb-2 btn btn-success me-2" id="selfPayButton">I am Self-pay</button>
+                        <button class="mb-2 btn btn-secondary d-none" id="resetSelfPayButton">Reset Self-Pay Status</button>
                     </div>
 
                     <!-- Insurance Modal -->
@@ -211,7 +211,7 @@
                                     <div id="insuranceAlert" class="alert alert-danger d-none" role="alert"></div>
                                     <div class="mb-3">
                                         <label for="insuranceProvider" class="form-label">Insurance Provider *</label>
-                                        <input type="text" id="insuranceProvider" class="form-control" placeholder="Insurance Provider">
+                                        <input type="text" id="insuranceProvider" class="form-control"  placeholder="Insurance Provider">
                                     </div>
                                     <div class="mb-3">
                                         <label for="policyNumber" class="form-label">Policy Number *</label>
@@ -289,11 +289,11 @@
                     <!-- Tab Content -->
                     <div class="tab-content" id="appointmentsTabContent">
                         <!-- Upcoming Appointments -->
-                        <div class="tab-pane fade show active p-3" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                        <div class="p-3 tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
                             <!-- Buttons -->
-                            <div class="d-flex flex-wrap mb-3">
-                                <button class="btn btn-primary me-2 mb-2" data-bs-toggle="modal" data-bs-target="#appointmentModal">Schedule an Appointment</button>
-                                <button class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal">Cancel an Appointment</button>
+                            <div class="flex-wrap mb-3 d-flex">
+                                <button class="mb-2 btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#appointmentModal">Schedule an Appointment</button>
+                                <button class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal">Cancel an Appointment</button>
                             </div>
 
                             <!-- Appointment Modal -->
@@ -375,7 +375,7 @@
                         </div>
 
                         <!-- Appointment History Tab -->
-                        <div class="tab-pane fade p-3" id="history" role="tabpanel" aria-labelledby="history-tab">
+                        <div class="p-3 tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
                             <h3>Appointment History</h3>
                             <div class="table-responsive">
                                 <table class="table table-striped" id="appointmentHistoryTable">
@@ -421,9 +421,9 @@
                     <!-- Tab Content -->
                     <div class="tab-content" id="medicalTabContent">
                         <!-- Medical History Tab -->
-                        <div class="tab-pane fade show active p-3" id="medical-history" role="tabpanel" aria-labelledby="medical-history-tab">
+                        <div class="p-3 tab-pane fade show active" id="medical-history" role="tabpanel" aria-labelledby="medical-history-tab">
                             <!-- Button to trigger the modal -->
-                            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addRecordModal">New Medical Record</button>
+                            <button class="mb-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRecordModal">New Medical Record</button>
 
                             <!-- Add Record Modal -->
                             <div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
@@ -475,10 +475,10 @@
                         </div>
 
                         <!-- Laboratory and Tests Tab -->
-                        <div class="tab-pane fade p-3" id="laboratory-tests" role="tabpanel" aria-labelledby="laboratory-tests-tab">
+                        <div class="p-3 tab-pane fade" id="laboratory-tests" role="tabpanel" aria-labelledby="laboratory-tests-tab">
 
                             <!-- Button to trigger the modal -->
-                            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#uploadLabModal">Upload Laboratory Test</button>
+                            <button class="mb-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadLabModal">Upload Laboratory Test</button>
 
                             <!-- Upload Laboratory Test Modal -->
                             <div class="modal fade" id="uploadLabModal" tabindex="-1" aria-labelledby="uploadLabModalLabel" aria-hidden="true">
@@ -531,7 +531,7 @@
         </div>
         <!-- End of Medical Information Section -->
         </div> <!-- End of Accordion -->
-    </div> <!-- End of Container -->     
+    </div> <!-- End of Container -->
 </div>
 
 @endsection

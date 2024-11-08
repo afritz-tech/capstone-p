@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Phone;
+use App\Models\PhoneNumber;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -111,7 +112,7 @@ class ProfileController extends Controller
     {
         try {
             $address = Address::findOrFail($id);
-            
+
             if ($address->user_id !== $this->user->id) {
                 return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
             }
@@ -143,8 +144,8 @@ class ProfileController extends Controller
     public function deletePhone($id)
     {
         try {
-            $phone = Phone::findOrFail($id);
-            
+            $phone = PhoneNumber::findOrFail($id);
+
             if ($phone->user_id !== $this->user->id) {
                 return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
             }

@@ -1,10 +1,10 @@
 <!-- HEADER -->
-<header class="bg-primary text-white p-3 fixed-top">
+<header class="p-3 text-white bg-primary fixed-top">
     <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="h5 mb-0 fw-bold">HealthHub Connect</h1>
+        <h1 class="mb-0 h5 fw-bold">HealthHub Connect</h1>
         <div>
             @if(auth()->check())
-            <span>Hi, {{ Auth::user()->firstname }}</span>
+            <span>Hi, {{Auth::user()->firstName }}</span>
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="btn btn-outline-light" id="logoutButton">
